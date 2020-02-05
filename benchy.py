@@ -7,7 +7,14 @@ import threading
 
 def main():
     parser = argparse.ArgumentParser(description='Benchy')
-    parser.add_argument('action', choices=['remote_server'])
+    parser.add_argument(
+        'action',
+        choices=[
+            'remote_server',
+            'test_01_ruby_puma',
+            'client',
+        ]
+    )
     parser.add_argument('rest', nargs=argparse.REMAINDER)
 
     arguments = parser.parse_args()
