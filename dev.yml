@@ -1,0 +1,27 @@
+name: benchy
+
+type: other
+
+up:
+  - ruby: 2.6.3
+  - python: 3.7.3
+  - pip:
+    - requirements.txt
+  - node:
+      yarn: false
+      version: v10.15.1
+      packages:
+        - .
+
+commands:
+  console:
+    desc:   'start a console'
+    run:    bin/console
+  run:
+    desc:   'start the application'
+    run:    bin/run
+  test:
+    syntax:
+      argument: file
+      optional: args...
+    run: bin/testunit
