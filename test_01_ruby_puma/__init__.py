@@ -18,7 +18,13 @@ def main(*args):
     parser.add_argument('--port', type=int, default='8001')
     parser.add_argument('--workers', type=str, default='1')
     parser.add_argument('--threads', type=str, default='16')
+    parser.add_argument(
+        '--target-uri', type=str, default='http://3.81.93.61:8001'
+    )
     arguments = parser.parse_args(args=args[1:])
+    inherited_environ = dict(os.environ)
+    inherited_environ.update({'REMOTE_ENDPOINT': arguments.target_uri})
+
     subprocess.run(
         [
             'puma',
@@ -29,7 +35,8 @@ def main(*args):
             '-b',
             f'tcp://{arguments.host}:{arguments.port}',
         ],
-        cwd=CURRENT_PATH
+        cwd=CURRENT_PATH,
+        env=inherited_environ
     )
 
 
