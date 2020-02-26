@@ -10,12 +10,15 @@ f = open(JSON_PAYLOAD_PATH, 'r')
 data = f.read()
 f.close()
 
+class Config(object):
+    REQUEST_BUFFER_QUEUE_SIZE = 1024 * 100
+    REQUEST_TIMEOUT = 60 * 10
+    RESPONSE_TIMEOUT = 60 * 10
+    KEEP_ALIVE_TIMEOUT = 60
+
 
 app = Sanic()
-app.config.REQUEST_BUFFER_QUEUE_SIZE = 1024 * 100
-app.config.REQUEST_TIMEOUT = 60 * 10
-app.config.RESPONSE_TIMEOUT = 60 * 10
-app.config.KEEP_ALIVE_TIMEOUT = 60
+app.config.from_object(Config)
 
 @app.route('/')
 async def json(request):
