@@ -14,7 +14,12 @@ def main(*args):
     parser.add_argument('--host', type=str, default='0.0.0.0')
     parser.add_argument('--port', type=int, default='8000')
     arguments = parser.parse_args(args=args[1:])
-    app.run(host=arguments.host, port=arguments.port, backlog=1024 * 100)
+    app.run(
+        host=arguments.host,
+        port=arguments.port,
+        backlog=1024 * 100,
+        workers=8,
+    )
 
 
 if __name__ == '__main__':
