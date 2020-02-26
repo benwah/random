@@ -12,6 +12,11 @@ f.close()
 
 
 app = Sanic()
+app.config.REQUEST_BUFFER_QUEUE_SIZE = 1024 * 100
+app.config.REQUEST_TIMEOUT = 60 * 10
+app.config.RESPONSE_TIMEOUT = 60 * 10
+app.config.KEEP_ALIVE_TIMEOUT = 60
+
 @app.route('/')
 async def json(request):
     await asyncio.sleep(10)
