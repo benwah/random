@@ -14,4 +14,4 @@ fastify.get(
 );
 
 
-fastify.listen(3000);
+fastify.listen(8000);
