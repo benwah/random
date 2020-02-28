@@ -14,4 +14,4 @@ fastify.get(
 );
 
 
-fastify.listen(8001);
+fastify.listen({port: 8000, host: '0.0.0.0', backlog: 4096 * 10});
