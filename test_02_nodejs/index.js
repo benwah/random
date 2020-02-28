@@ -14,4 +14,4 @@ fastify.get(
 );
 
 
-fastify.listen(8000);
+fastify.listen('0.0.0.0:8000');
