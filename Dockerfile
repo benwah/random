@@ -16,6 +16,8 @@ RUN python3 -m venv pyenv
 RUN pyenv/bin/pip3 install wheel
 RUN pyenv/bin/pip3 install -r requirements.txt
 
+RUN npm install
+
 ENV PATH="/home/benchy/.gem/ruby/2.5.0/bin:${PATH}"
 ENV GEM_HOME="/home/benchy/.gem/ruby/2.5.0"
 

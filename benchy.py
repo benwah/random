@@ -12,6 +12,7 @@ def main():
         choices=[
             'remote_server',
             'test_01_ruby_puma',
+            'test_02_nodejs',
             'client',
         ]
     )
