@@ -1,17 +1,27 @@
-const fastify = require('fastify')({ logger: true })
-const nodeFetch = require('node-fetch');
+const HTTP = require('http');
+const UPSTREAM_URL = 'http://3.95.249.36:8000/';
 
-fastify.get(
-  '/', 
-  async (request, reply) => {
-    const guid = await nodeFetch('http://3.95.249.36:8000/')
-      .then(res => res.json())
-      .then(json => json[0].guid);
+const server = HTTP.createServer((request, response) => {
+  HTTP.get(UPSTREAM_URL, (upstreamResponse) => {
+    let bytes = Buffer.from('');
 
-    console.log(guid);
-    reply.send(guid);
-  }
-);
+    upstreamResponse.on('data', (data) => {
+      bytes = Buffer.concat([bytes, data]);
+    });
 
+    upstreamResponse.on('end', () => {
+      const data = JSON.parse(bytes);
 
-fastify.listen({port: 8000, host: '0.0.0.0', backlog: 4096 * 10});
+      response.setHeader('Content-Length', Buffer.byteLength(data[0].guid));
+      response.writeHead(200);
+      response.end(data[0].guid);
+    });
+  }).on('error', (e, abc) => {
+    response.setHeader('Content-Length', 0);
+    response.writeHead(400);
+    response.end();
+  });
+});
+
+server.listen(8000);
+
