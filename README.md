@@ -41,7 +41,7 @@ ssh -i poo.pem ubuntu@54.198.239.123
 tmux
 docker run -p 8000:8000 --rm -i -t 6c90fff1d550 pyenv/bin/python3 benchy.py test_01_ruby_puma --host 0.0.0.0 --port 8000 --workers 1 --threads 2 --target-uri http://3.95.249.36:8000/
 # new tmux window
-dstat -C 0,1,total -d -g -i -l -m -n -p -r -T -y --aio --fs --ipc --lock --raw --socket --unix
+dstat -C 0,1,total --output out.csv
 ```
 
 ## bench it
